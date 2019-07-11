@@ -20,7 +20,7 @@ app.use(cors());
 app.use('/', express.static('public'));
 app.use('/api', router);
 
-const PORT = 3003;
+const PORT = 3009;
 app.listen(PORT, () => {
   console.log(`server working on port ${PORT}`);
 });
