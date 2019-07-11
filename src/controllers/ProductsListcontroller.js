@@ -3,6 +3,7 @@ const ProductsListModel = require('../models/ProductsList');
 module.exports.getAllProductsList = async (req, res) => {
   try {
     const data = await ProductsListModel.find({});
+    console.log(data);
     res.json({
       success: true,
       data,
@@ -24,7 +25,7 @@ module.exports.createNewProduct = async (req, res) => {
       res.json({
         success: true,
         message: 'product created',
-        createdFilm: doc,
+        createdProduct: doc,
       }),
     );
   } catch (err) {
