@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Loader from 'react-loader-spinner';
 import s from './App.module.css';
 import Header from './components/Header/Header';
 import ProductsList from './components/ProductsList/ProductsList';
 import getData from './redux/actions/getAllProductsAction';
-// import CreateProduct from './components/CreateProduct/CreateProduct';
-// import Login from './components/Login';
+import CreateProduct from './components/CreateProduct/CreateProduct';
+import Login from './components/Login/Login';
 
 class App extends Component {
   componentDidMount() {
@@ -20,15 +19,13 @@ class App extends Component {
       <div>
         <Header />
         {!dataProducts.length ? (
-          <div className={s.loader}>
-            <Loader type="Puff" color="#4e4e4e" height="100" width="100" />
-          </div>
+          <p className={s.loader}>...Loading</p>
         ) : (
           <Switch>
             <Redirect exact from="/" to="/products" />
-            {/* <Route exact path="/products" component={ProductsList} /> */}
-            {/* <Route exact path="/login" component={Login} /> */}
-            {/* <Route path="/product/new" component={CreateProduct} /> */}
+            <Route exact path="/products" component={ProductsList} />
+            <Route exact path="/login" component={Login} />
+            <Route path="/product/new" component={CreateProduct} />
           </Switch>
         )}
       </div>

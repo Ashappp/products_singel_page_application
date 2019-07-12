@@ -10,7 +10,7 @@ const url =
 
 mongoose
   .connect(url, { useNewUrlParser: true, useCreateIndex: true })
-  .then(() => console.log('DB OK'), err => console.log(err));
+  .then(() => console.log('MongoDB OK'), err => console.log(err));
 
 app.use(logger('tiny'));
 app.use(express.urlencoded({ extended: true }));

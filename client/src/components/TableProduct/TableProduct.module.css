@@ -1,0 +1,13 @@
+.td {
+  margin-right: 2rem;
+  margin-top: 2rem;
+  display: block;
+}
+
+.tr {
+  margin-right: 2rem;
+}
+
+.NavLink {
+  text-decoration: none;
+}
