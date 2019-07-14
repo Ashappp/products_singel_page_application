@@ -14,6 +14,4 @@ const asyncDataAction = () => dispatch => {
     .catch(error => console.log(error));
 };
 
-export default {
-  asyncDataAction,
-};
+export default asyncDataAction;

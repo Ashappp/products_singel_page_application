@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux';
 import dataProducts from './getAllProductsReduser';
-import userId from './userIdReduser';
-import oneProduct from './oneProductreducer';
+import authToken from './authTokenReducer';
 
 const rootReducer = combineReducers({
   dataProducts,
-  userId,
-  oneProduct,
+  authToken,
 });
 
 export default rootReducer;

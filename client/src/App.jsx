@@ -3,11 +3,12 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import s from './App.module.css';
 import Header from './components/Header/Header';
-import ProductsList from './components/ProductsList/ProductsList';
-import getData from './redux/actions/getAllProductsAction';
-import CreateProduct from './components/CreateProduct/CreateProduct';
-import Login from './components/Login/Login';
-import ProductsPage from './components/ProductPage/ProductPage';
+import AllProducts from './pages/AllProducts/AllProducts';
+import getAllProductsAction from './redux/actions/getAllProductsAction';
+import CreateProduct from './pages/CreateProduct/CreateProduct';
+import Login from './pages/Login/Login';
+import ProductsPage from './pages/ProductPage/ProductPage';
+import PrivateRoute from './components/PrivateRouter/PrivateRoute';
 
 class App extends Component {
   componentDidMount() {
@@ -24,10 +25,10 @@ class App extends Component {
         ) : (
           <Switch>
             <Redirect exact from="/" to="/products" />
-            <Route exact path="/products/:productId" component={ProductsPage} />
-            <Route exact path="/products" component={ProductsList} />
-            <Route exact path="/login" component={Login} />
-            <Route path="/product/new" component={CreateProduct} />
+            <Route path="/products/:productId" component={ProductsPage} />
+            <Route path="/products" component={AllProducts} />
+            <Route path="/login" component={Login} />
+            <PrivateRoute exact path="/product/new" component={CreateProduct} />
           </Switch>
         )}
       </div>
@@ -40,7 +41,7 @@ const MSTP = store => ({
 });
 
 const MDTP = dispatch => ({
-  getData: data => dispatch(getData.asyncDataAction(data)),
+  getData: data => dispatch(getAllProductsAction(data)),
 });
 
 export default connect(

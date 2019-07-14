@@ -14,11 +14,10 @@ module.exports.LoginUser = async (req, res) => {
       login: reqLogin,
       password: reqPassword,
     });
-    console.log(user);
     res.json({
       success: true,
       message: 'login succses',
-      userId: user[0]._id,           
+      userId: user[0]._id,
       token: token,
     });
   } catch (err) {

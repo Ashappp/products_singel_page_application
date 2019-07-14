@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import API from '../../servises/Api';
 import { connect } from 'react-redux';
-import createNewProductAction from '../../redux/actions/createNewProduct';
+import addNewProduct from '../../redux/actions/getCreatedProduct';
 import PropTypes from 'prop-types';
 import s from './CreateProduct.module.css';
 
-class AddMoviesPage extends Component {
+class CreteProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,14 +16,12 @@ class AddMoviesPage extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.tokenInLocalStorage();
-  // }
-
   handlerOnSubmit = e => {
     e.preventDefault();
     const { nameProductInput, priceInput, descriptionInput } = this.state;
-    const { created, addProduct } = this.props;
+    const { addNewProduct } = this.props;
+    const created = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
     const createObj = {
       name: nameProductInput,
       price: Number(priceInput),
@@ -31,10 +29,12 @@ class AddMoviesPage extends Component {
       createdBy: created,
     };
     console.log(createObj);
-    API.fetchCreateProduct(createObj)
-
+    API.fetchCreateProduct(createObj, token)
       .then(res => {
-        addProduct(res.data.createdProduct);
+        if (res.data.message === 'Token is not valid') {
+          this.props.history.push('/login');
+        }
+        addNewProduct(res.data.createdProduct);
       })
       .catch(err => {
         console.log(err);
@@ -106,19 +106,15 @@ class AddMoviesPage extends Component {
   }
 }
 
-const MSTP = store => ({
-  created: store.userId,
-});
-
 const MDTP = dispatch => ({
-  addProduct: data => dispatch(createNewProductAction(data)),
+  addNewProduct: data => dispatch(addNewProduct(data)),
 });
 
-// AddMoviesPage.propTypes = {
-//   addMovie: PropTypes.func.isRequired,
-// };
+CreteProduct.propTypes = {
+  addProduct: PropTypes.func.isRequired,
+};
 
 export default connect(
-  MSTP,
+  null,
   MDTP,
-)(AddMoviesPage);
+)(CreteProduct);

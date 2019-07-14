@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import s from './ProductsList.module.css';
-import TableProduct from '../TableProduct/TableProduct';
+import s from './AllProducts.module.css';
+import TableProduct from '../../components/TableProduct/TableProduct';
 
 class ProductsList extends Component {
   render() {

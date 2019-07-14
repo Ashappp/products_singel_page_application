@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../servises/Api';
-import { connect } from 'react-redux';
-import getUserID from '../../redux/actions/userIdAction';
+// import getUserID from '../../redux/actions/userIdAction';
+// import getToken from '../../redux/actions/getToken';
 import PropTypes from 'prop-types';
 import s from './Login.module.css';
 
@@ -12,13 +12,13 @@ class Login extends Component {
       loginInput: '',
       passwordInput: '',
       submitDisabled: true,
+      loginSuccses: '',
     };
   }
 
   handlerOnSubmit = e => {
     e.preventDefault();
     const { loginInput, passwordInput } = this.state;
-    const { getUserID } = this.props;
     const createObj = {
       login: loginInput,
       password: Number(passwordInput),
@@ -26,9 +26,12 @@ class Login extends Component {
 
     API.fetchLogin(createObj)
       .then(res => {
-        getUserID(res.data.userId);
+        console.log(res.data.message);
+        this.setState({ loginSuccses: res.data.message });
+        localStorage.setItem('userId', res.data.userId);
         localStorage.setItem('token', res.data.token);
-        this.props.history.push('/product/new');
+        if (res.data.message === 'login succses')
+          this.props.history.push('/product/new');
       })
       .catch(err => {
         console.log(err);
@@ -50,10 +53,17 @@ class Login extends Component {
   };
 
   render() {
-    const { loginInput, passwordInput, submitDisabled } = this.state;
+    const {
+      loginInput,
+      passwordInput,
+      submitDisabled,
+      loginSuccses,
+    } = this.state;
     return (
       <form className={s.form} onSubmit={this.handlerOnSubmit}>
-        {/* <p className={s.p}>Invalid email/password!!!</p> */}
+        {loginSuccses === 'login not succses' && (
+          <p className={s.p}>Invalid email/password!</p>
+        )}
         <input
           className={s.input}
           type="text"
@@ -83,11 +93,4 @@ class Login extends Component {
   }
 }
 
-const MDTP = dispatch => ({
-  getUserID: userId => dispatch(getUserID(userId)),
-});
-
-export default connect(
-  null,
-  MDTP,
-)(Login);
+export default Login;

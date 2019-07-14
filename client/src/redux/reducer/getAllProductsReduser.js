@@ -3,7 +3,7 @@ function data(state = [], action) {
     case 'ADD_DATA_IN_STORE':
       return [...state, ...action.payload];
 
-    case 'CREATE_NEW_PRODUCT':
+    case 'ADD_NEW_PRODUCT':
       return [...state, action.payload];
 
     default:

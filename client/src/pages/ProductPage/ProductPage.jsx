@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import s from './ProductPage.module.css';
 import API from '../../servises/Api';
-import ProductCard from '../ProductCard/ProductCard';
-import getOneProduct from '../../redux/actions/getOneProductById';
+import ProductCard from '../../components/ProductCard/ProductCard';
 
 const createObjId = props => {
   const id = props.match.params.productId;
@@ -33,5 +32,9 @@ class ProductPage extends Component {
     );
   }
 }
+
+ProductPage.propTypes = {
+  id: PropTypes.string.isRequired,
+};
 
 export default ProductPage;
