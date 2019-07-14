@@ -1,16 +1,14 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import s from './TableProduct.module.css';
 
 const TableProduct = ({ item }) => {
+  const { name, price, _id } = item;
   return (
-    <tr className={s.tr} key={item._id}>
-      <td>{item.name}</td>
-      <td>{item.price}</td>
-      <td>{item.description}</td>
-      <NavLink className={s.NavLink} to={`/products/${item.id}`}>
-        Seen More
-      </NavLink>
+    <tr className={s.tr} key={_id}>
+      <td>{name}</td>
+      <td>{price}</td>
+      <Link to={`products/${_id}`}>See More</Link>
     </tr>
   );
 };

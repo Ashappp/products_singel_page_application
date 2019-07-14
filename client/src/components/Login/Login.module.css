@@ -26,3 +26,8 @@
   border-radius: 30px;
   background-color: rgb(212, 91, 10);
 }
+.p {
+  text-align: center;
+  color: rgb(99, 39, 39);
+  font-weight: 800;
+}

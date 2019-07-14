@@ -10,7 +10,6 @@ const asyncDataAction = () => dispatch => {
     .get(`http://localhost:3009/api/products`)
     .then(res => {
       dispatch(getData(res.data.data));
-      //   dispatch(getArrFromDraw(res.data.data));
     })
     .catch(error => console.log(error));
 };

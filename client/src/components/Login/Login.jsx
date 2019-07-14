@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-// import API from '../../services/api';
+import API from '../../servises/Api';
 import { connect } from 'react-redux';
-// import addMovie from "../../redux/actions/addMovieAction";
+import getUserID from '../../redux/actions/userIdAction';
 import PropTypes from 'prop-types';
 import s from './Login.module.css';
 
-class AddMoviesPage extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,19 +18,21 @@ class AddMoviesPage extends Component {
   handlerOnSubmit = e => {
     e.preventDefault();
     const { loginInput, passwordInput } = this.state;
+    const { getUserID } = this.props;
     const createObj = {
       login: loginInput,
       password: Number(passwordInput),
     };
 
-    // API.createMovie(createObj)
-    //   .then(res => {
-    //     addMovie(res.data.createdFilm);
-    //     this.props.history.push('/movies');
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+    API.fetchLogin(createObj)
+      .then(res => {
+        getUserID(res.data.userId);
+        localStorage.setItem('token', res.data.token);
+        this.props.history.push('/product/new');
+      })
+      .catch(err => {
+        console.log(err);
+      });
     this.setState({
       loginInput: '',
       passwordInput: '',
@@ -51,6 +53,7 @@ class AddMoviesPage extends Component {
     const { loginInput, passwordInput, submitDisabled } = this.state;
     return (
       <form className={s.form} onSubmit={this.handlerOnSubmit}>
+        {/* <p className={s.p}>Invalid email/password!!!</p> */}
         <input
           className={s.input}
           type="text"
@@ -80,4 +83,11 @@ class AddMoviesPage extends Component {
   }
 }
 
-export default AddMoviesPage;
+const MDTP = dispatch => ({
+  getUserID: userId => dispatch(getUserID(userId)),
+});
+
+export default connect(
+  null,
+  MDTP,
+)(Login);

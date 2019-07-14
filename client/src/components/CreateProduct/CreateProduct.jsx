@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import API from '../../services/api';
+import API from '../../servises/Api';
 import { connect } from 'react-redux';
-// import addMovie from "../../redux/actions/addMovieAction";
+import createNewProductAction from '../../redux/actions/createNewProduct';
 import PropTypes from 'prop-types';
 import s from './CreateProduct.module.css';
 
@@ -16,25 +16,29 @@ class AddMoviesPage extends Component {
     };
   }
 
+  // componentDidMount() {
+  //   this.tokenInLocalStorage();
+  // }
+
   handlerOnSubmit = e => {
     e.preventDefault();
     const { nameProductInput, priceInput, descriptionInput } = this.state;
-    const { created } = this.props;
+    const { created, addProduct } = this.props;
     const createObj = {
       name: nameProductInput,
       price: Number(priceInput),
-      description: descriptionInput,
+      discription: descriptionInput,
       createdBy: created,
     };
+    console.log(createObj);
+    API.fetchCreateProduct(createObj)
 
-    // API.createMovie(createObj)
-    //   .then(res => {
-    //     addMovie(res.data.createdFilm);
-    //     this.props.history.push('/movies');
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+      .then(res => {
+        addProduct(res.data.createdProduct);
+      })
+      .catch(err => {
+        console.log(err);
+      });
     this.setState({
       nameProductInput: '',
       priceInput: '',
@@ -102,19 +106,19 @@ class AddMoviesPage extends Component {
   }
 }
 
-// const MSTP = store =>({
-//     created: store.createdBy
-// })
+const MSTP = store => ({
+  created: store.userId,
+});
 
-// const MDTP = dispatch => ({
-//   addMovie: data => dispatch(addMovie(data))
-// });
+const MDTP = dispatch => ({
+  addProduct: data => dispatch(createNewProductAction(data)),
+});
 
-AddMoviesPage.propTypes = {
-  addMovie: PropTypes.func.isRequired,
-};
+// AddMoviesPage.propTypes = {
+//   addMovie: PropTypes.func.isRequired,
+// };
 
 export default connect(
-  null,
-  null,
+  MSTP,
+  MDTP,
 )(AddMoviesPage);

@@ -18,9 +18,9 @@ module.exports.getAllProductsList = async (req, res) => {
 };
 
 module.exports.getProductById = async (req, res) => {
-  console.log(req.params);
   try {
-    const data = await ProductsListModel.findById(req.params.id);
+    const data = await ProductsListModel.findById(req.body._id);
+    console.log('Product BY ID:', data);
     res.json({
       success: true,
       data,
@@ -37,6 +37,7 @@ module.exports.getProductById = async (req, res) => {
 module.exports.createNewProduct = async (req, res) => {
   try {
     const newProduct = new ProductsListModel(req.body);
+    console.log(req.body);
     await newProduct.save().then(doc =>
       res.json({
         success: true,

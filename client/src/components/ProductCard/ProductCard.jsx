@@ -1,17 +1,14 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import s from './ProductCard.module.css';
 
-const ProductCard = ({ filteredData, item, deleteFilm }) => {
+const ProductCard = ({ name, price, description, _id }) => {
   return (
-    <li className={s.list_item} key={item._id}>
-      <h2>{item.name}</h2>
-      <h3>Price: {item.price}</h3>
-      <h4>description: {item.description}</h4>
-      <NavLink className={s.item} to={`/products/${item.id}`}>
-        Seen More
-      </NavLink>
-    </li>
+    <article className={s} key={_id}>
+      <h2>{name}</h2>
+      <span>Price: {price}</span>
+      <p>{description}</p>
+      <button>Back to Products</button>
+    </article>
   );
 };
 

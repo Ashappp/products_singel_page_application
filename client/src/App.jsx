@@ -7,6 +7,7 @@ import ProductsList from './components/ProductsList/ProductsList';
 import getData from './redux/actions/getAllProductsAction';
 import CreateProduct from './components/CreateProduct/CreateProduct';
 import Login from './components/Login/Login';
+import ProductsPage from './components/ProductPage/ProductPage';
 
 class App extends Component {
   componentDidMount() {
@@ -23,6 +24,7 @@ class App extends Component {
         ) : (
           <Switch>
             <Redirect exact from="/" to="/products" />
+            <Route exact path="/products/:productId" component={ProductsPage} />
             <Route exact path="/products" component={ProductsList} />
             <Route exact path="/login" component={Login} />
             <Route path="/product/new" component={CreateProduct} />
