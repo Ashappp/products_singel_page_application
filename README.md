@@ -14,14 +14,3 @@ npm start
 
 # Server on localhost:3000
 # Client on localhost:3009
-
-if error
-{
-statusCode: 400
-success: false,
-message: "file is not ulpoad",
-eror
-}
-
-
-```
