@@ -9,10 +9,12 @@ import CreateProduct from './pages/CreateProduct/CreateProduct';
 import Login from './pages/Login/Login';
 import ProductsPage from './pages/ProductPage/ProductPage';
 import PrivateRoute from './components/PrivateRouter/PrivateRoute';
+import { asyncAuthToken } from './redux/actions/authTokenActions';
 
 class App extends Component {
   componentDidMount() {
     this.props.getData();
+    this.props.asyncAuthToken();
   }
 
   render() {
@@ -42,6 +44,7 @@ const MSTP = store => ({
 
 const MDTP = dispatch => ({
   getData: data => dispatch(getAllProductsAction(data)),
+  asyncAuthToken: () => dispatch(asyncAuthToken()),
 });
 
 export default connect(

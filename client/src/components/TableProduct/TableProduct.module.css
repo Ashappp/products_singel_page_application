@@ -6,8 +6,13 @@
 
 .tr {
   margin-right: 2rem;
+  margin: 0 auto;
 }
 
-.NavLink {
+.link {
+  display: block;
+  color: white;
   text-decoration: none;
+  text-align: center;
+  background-color: rgb(192, 104, 104);
 }

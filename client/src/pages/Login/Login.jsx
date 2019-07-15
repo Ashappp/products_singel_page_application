@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import API from '../../servises/Api';
+import { connect } from 'react-redux';
+import { authToken } from '../../redux/actions/authTokenActions';
 // import getUserID from '../../redux/actions/userIdAction';
 // import getToken from '../../redux/actions/getToken';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import s from './Login.module.css';
 
 class Login extends Component {
@@ -16,6 +18,11 @@ class Login extends Component {
     };
   }
 
+  authTokenBoolean = res => {
+    const boolean = res.data.message !== 'Token is not valid' ? true : false;
+    this.props.authToken(boolean);
+  };
+
   handlerOnSubmit = e => {
     e.preventDefault();
     const { loginInput, passwordInput } = this.state;
@@ -26,10 +33,10 @@ class Login extends Component {
 
     API.fetchLogin(createObj)
       .then(res => {
-        console.log(res.data.message);
         this.setState({ loginSuccses: res.data.message });
         localStorage.setItem('userId', res.data.userId);
         localStorage.setItem('token', res.data.token);
+        this.authTokenBoolean(res);
         if (res.data.message === 'login succses')
           this.props.history.push('/product/new');
       })
@@ -93,4 +100,11 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const MDTP = dispatch => ({
+  authToken: boolean => dispatch(authToken(boolean)),
+});
+
+export default connect(
+  null,
+  MDTP,
+)(Login);

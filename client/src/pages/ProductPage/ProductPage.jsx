@@ -26,7 +26,7 @@ class ProductPage extends Component {
     const { product } = this.state;
     return (
       <div>
-        <h1>Product</h1>
+        <h1 className={s.title}>Product</h1>
         {product && <ProductCard {...product} />}
       </div>
     );
@@ -34,7 +34,7 @@ class ProductPage extends Component {
 }
 
 ProductPage.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
 };
 
 export default ProductPage;

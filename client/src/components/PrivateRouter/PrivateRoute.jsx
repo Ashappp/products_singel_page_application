@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { authToken } from '../../servises/helpers';
-import asyncAuthToken from '../../redux/actions/authTokenActions';
+import { asyncAuthToken } from '../../redux/actions/authTokenActions';
+import PropTypes from 'prop-types';
 
 class PrivateRoute extends Component {
   componentDidMount() {
@@ -21,16 +21,16 @@ class PrivateRoute extends Component {
 }
 
 const MDTP = dispatch => ({
-  asyncAuthToken: boolean => dispatch(asyncAuthToken(boolean)),
+  asyncAuthToken: () => dispatch(asyncAuthToken()),
 });
 
 const MSTP = store => ({
   authToken: store.authToken,
 });
 
-//   CreteProduct.propTypes = {
-//     addProduct: PropTypes.func.isRequired,
-//   };
+PrivateRoute.propTypes = {
+  authToken: PropTypes.bool,
+};
 
 export default connect(
   MSTP,

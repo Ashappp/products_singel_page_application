@@ -1,7 +1,8 @@
 import axios from 'axios';
+import * as t from './actionsType';
 
 const getData = data => ({
-  type: 'ADD_DATA_IN_STORE',
+  type: t.ADD_DATA_IN_STORE,
   payload: data,
 });
 

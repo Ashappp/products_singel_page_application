@@ -31,10 +31,9 @@ class CreteProduct extends Component {
     console.log(createObj);
     API.fetchCreateProduct(createObj, token)
       .then(res => {
-        if (res.data.message === 'Token is not valid') {
-          this.props.history.push('/login');
-        }
         addNewProduct(res.data.createdProduct);
+        if (res.data.message === 'Token is not valid')
+          this.props.history.push('/login');
       })
       .catch(err => {
         console.log(err);
@@ -111,7 +110,7 @@ const MDTP = dispatch => ({
 });
 
 CreteProduct.propTypes = {
-  addProduct: PropTypes.func.isRequired,
+  addNewProduct: PropTypes.func.isRequired,
 };
 
 export default connect(

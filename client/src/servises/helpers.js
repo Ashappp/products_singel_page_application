@@ -1,12 +1,6 @@
 import axios from 'axios';
 
 export const authToken = () => {
-  const tokenIsValid = message => {
-    if (!message === 'Token is not valid') return true;
-    else {
-      return true;
-    }
-  };
   const token = localStorage.getItem('token');
   axios
     .post(

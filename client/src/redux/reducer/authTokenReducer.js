@@ -1,6 +1,8 @@
-function authToken(state = true, action) {
+import * as t from '../actions/actionsType';
+
+function authToken(state = false, action) {
   switch (action.type) {
-    case 'AUTH_TOKEN':
+    case t.AUTH_TOKEN:
       return action.payload;
 
     default:

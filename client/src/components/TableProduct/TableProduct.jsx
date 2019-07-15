@@ -8,7 +8,9 @@ const TableProduct = ({ item }) => {
     <tr className={s.tr} key={_id}>
       <td>{name}</td>
       <td>{price}</td>
-      <Link to={`products/${_id}`}>See More</Link>
+      <Link className={s.link} to={`products/${_id}`}>
+        Seen
+      </Link>
     </tr>
   );
 };

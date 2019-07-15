@@ -1,11 +1,12 @@
 import axios from 'axios';
+import * as t from './actionsType';
 
-const authToken = data => ({
-  type: 'AUTH_TOKEN',
+export const authToken = data => ({
+  type: t.AUTH_TOKEN,
   payload: data,
 });
 
-const asyncDataAction = () => dispatch => {
+export const asyncAuthToken = () => dispatch => {
   const token = localStorage.getItem('token');
   axios
     .post(
@@ -18,9 +19,13 @@ const asyncDataAction = () => dispatch => {
         },
       },
     )
-    .then(res => (res.data.message !== 'Token is not valid' ? true : false))
-    .then(boolean => dispatch(authToken(boolean)))
-    .catch(error => console.log(error));
+    .then(res => {
+      const boolean = res.data.message !== 'Token is not valid' ? true : false;
+      dispatch(authToken(boolean));
+    })
+    .catch(error => {
+      console.log(error);
+    });
 };
 
-export default asyncDataAction;
+export default { authToken, asyncAuthToken };

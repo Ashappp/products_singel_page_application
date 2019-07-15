@@ -10,14 +10,16 @@ class ProductsList extends Component {
     return (
       <table className={s.table}>
         <caption>Products list</caption>
-        <tr className={s.tr}>
-          <th className={s.th}>Product name</th>
-          <th className={s.th}>Price</th>
-          <th className={s.th}>Seen More</th>
-        </tr>
-        {dataProducts.length
-          ? dataProducts.map(el => <TableProduct item={el} key={el._id} />)
-          : null}
+        <tbody>
+          <tr className={s.tr}>
+            <th className={s.th}>Product name</th>
+            <th className={s.th}>Price</th>
+            <th className={s.th}>Seen More</th>
+          </tr>
+          {dataProducts.length
+            ? dataProducts.map(el => <TableProduct item={el} key={el._id} />)
+            : null}
+        </tbody>
       </table>
     );
   }
@@ -28,7 +30,7 @@ const MSTP = store => ({
 });
 
 ProductsList.propTypes = {
-  filteredData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dataProducts: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(MSTP)(ProductsList);
