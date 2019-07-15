@@ -1,3 +1,4 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 module.exports.authCheck = (req, res, next) => {
@@ -8,7 +9,7 @@ module.exports.authCheck = (req, res, next) => {
   }
 
   if (userToken) {
-    jwt.verify(userToken, 'Super_key12345', (err, decoded) => {
+    jwt.verify(userToken, process.env.JWT_SECRET_KEY, (err, decoded) => {
       if (err) {
         return res.json({
           success: false,
