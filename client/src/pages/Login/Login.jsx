@@ -82,7 +82,7 @@ class Login extends Component {
         />
         <input
           className={s.input}
-          type="text"
+          type="password"
           onChange={e => this.handleChange(e)}
           name="passwordInput"
           placeholder="Password"
