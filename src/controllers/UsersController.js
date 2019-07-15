@@ -8,6 +8,9 @@ module.exports.LoginUser = async (req, res) => {
   const token = jwt.sign(
     { login: reqLogin, password: reqPassword },
     process.env.JWT_SECRET_KEY,
+    {
+      expiresIn: '1h',
+    },
   );
 
   try {
