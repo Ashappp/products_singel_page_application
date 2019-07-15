@@ -1,3 +1,4 @@
+require('dotenv').config();
 const UserModel = require('../models/Users');
 const jwt = require('jsonwebtoken');
 
@@ -6,7 +7,7 @@ module.exports.LoginUser = async (req, res) => {
   const reqPassword = req.body.password;
   const token = jwt.sign(
     { login: reqLogin, password: reqPassword },
-    'Super_key12345',
+    process.env.JWT_SECRET_KEY,
   );
 
   try {
