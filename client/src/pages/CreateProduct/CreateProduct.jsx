@@ -27,13 +27,16 @@ class CreteProduct extends Component {
       price: Number(priceInput),
       discription: descriptionInput,
       createdBy: created,
+      message: '',
     };
-    console.log(createObj);
+
     API.fetchCreateProduct(createObj, token)
       .then(res => {
         addNewProduct(res.data.createdProduct);
-        if (res.data.message === 'Token is not valid')
+        if (res.data.message === 'Token is not valid') {
           this.props.history.push('/login');
+        }
+        this.setState({ message: res.data.message });
       })
       .catch(err => {
         console.log(err);
@@ -64,9 +67,11 @@ class CreteProduct extends Component {
       priceInput,
       descriptionInput,
       submitDisabled,
+      message,
     } = this.state;
     return (
       <form className={s.form} onSubmit={this.handlerOnSubmit}>
+        <p className={s.message}>{message}</p>
         <input
           className={s.input}
           type="text"
